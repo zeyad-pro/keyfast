@@ -1,70 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
+@tailwind utilities;
+/* 
+body {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  background-color: #0b0f17; 
+  color: #e2e8f0;
+  min-height: 100vh;
+}
+@layer utilities {
+  @keyframes fall {
+    to {
+      transform: translate3d(var(--drift, 0px), 105vh, 0) rotate(var(--rotation, 720deg));
+      opacity: 0;
+    }
+  }
+} *
+/* =========================================================
+   KeyFast Design Tokens
+   Theme: dark (default) / light
+   No shadows. No gradients. Small radii. Editorial serif.
+   ========================================================= */
 
-:root {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #f4f7f5;
-  background: #090b0b;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+/* ---------- DARK (default) ---------- */
+:root,
+:root[data-theme="dark"] {
+  /* Brand blue */
+  --kf-primary: #6b9bff;
+  --kf-primary-active: #5a86e6;
+  --kf-primary-disabled: #2a3550;
+  --kf-primary-soft: #1e2a44;      /* used for soft backgrounds of primary-tinted surfaces */
+
+  /* Secondary accents */
+  --kf-accent-teal: #6ec5bb;
+  --kf-accent-amber: #d8a35a;
+
+  /* Surfaces — dark navy stack (inspired by Claude's product chrome) */
+  --kf-canvas: #0e1117;             /* page floor */
+  --kf-surface-soft: #131720;       /* subtle bands */
+  --kf-surface-card: #1a1f2a;       /* cards */
+  --kf-surface-cream-strong: #232935;
+
+  /* "Dark product" surfaces (inside already-dark pages, slightly deeper) */
+  --kf-surface-dark: #0a0d12;
+  --kf-surface-dark-elevated: #171c25;
+  --kf-surface-dark-soft: #10141b;
+
+  /* Hairlines — subtle light-on-dark */
+  --kf-hairline: #1f2531;
+  --kf-hairline-soft: #171c26;
+
+  /* Text */
+  --kf-ink: #eef2f8;
+  --kf-body-strong: #d7dde7;
+  --kf-body: #b3bccb;
+  --kf-muted: #7e8798;
+  --kf-muted-soft: #5d6576;
+  --kf-on-primary: #0b1220;
+  --kf-on-dark: #eef2f8;
+  --kf-on-dark-soft: #98a1b0;
+
+  /* Semantic */
+  --kf-success: #7ed99a;
+  --kf-warning: #e0b369;
+  --kf-error: #f08383;
+
+  color-scheme: dark;
 }
 
-* {
-  box-sizing: border-box;
+/* ---------- LIGHT (cream, Anthropic-inspired) ---------- */
+:root[data-theme="light"] {
+  --kf-primary: #3b6dd1;
+  --kf-primary-active: #2d56a8;
+  --kf-primary-disabled: #d7dce4;
+  --kf-primary-soft: #e6ecf8;
+
+  --kf-accent-teal: #4a9d94;
+  --kf-accent-amber: #b8863b;
+
+  --kf-canvas: #faf9f5;
+  --kf-surface-soft: #f5f2eb;
+  --kf-surface-card: #efece2;
+  --kf-surface-cream-strong: #e8e4d7;
+
+  --kf-surface-dark: #171a1f;
+  --kf-surface-dark-elevated: #23272e;
+  --kf-surface-dark-soft: #1c2026;
+
+  --kf-hairline: #e6e2d8;
+  --kf-hairline-soft: #ebe8e0;
+
+  --kf-ink: #14161a;
+  --kf-body-strong: #25272c;
+  --kf-body: #3d3f44;
+  --kf-muted: #6c6d72;
+  --kf-muted-soft: #8e8f94;
+  --kf-on-primary: #ffffff;
+  --kf-on-dark: #faf9f5;
+  --kf-on-dark-soft: #a09fa4;
+
+  --kf-success: #4c8b53;
+  --kf-warning: #b8863b;
+  --kf-error: #b34848;
+
+  color-scheme: light;
 }
 
-html {
-  background: #090b0b;
-}
+/* ---------- Base ---------- */
+html, body, #root { min-height: 100vh; }
 
 body {
-  min-width: 320px;
-  min-height: 100vh;
   margin: 0;
-  background:
-    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px),
-    #090b0b;
-  background-size: 42px 42px;
+  font-family:
+    "Inter",
+    "IBM Plex Sans Arabic",
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;  font-size: 16px;
+  line-height: 1.55;
+  color: var(--kf-body);
+  background: var(--kf-canvas);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  /* smooth theme transition — subtle, functional only */
+  transition: background-color 200ms ease, color 200ms ease;
+}
+html[lang="ar"] body {
+  font-family:
+    "IBM Plex Sans Arabic",
+    "Inter",
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-button,
-input {
-  font: inherit;
+/* ---------- Editorial display serif ---------- */
+.font-display {
+  font-family:
+    "Cormorant Garamond",
+    "EB Garamond",
+    "Tiempos Headline",
+    Garamond,
+    "Times New Roman",
+    serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--kf-ink);
 }
 
-::selection {
-  background: rgba(103, 227, 146, .25);
+html[lang="ar"] .font-display {
+  font-family:
+   "Amiri",
+   /* "Noto Naskh Arabic",  */
+    "IBM Plex Sans Arabic",
+    "Inter",
+    -apple-system, sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
 }
 
-.scrollbar-thin::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* ---------- Editorial display serif ---------- */
+.font-display {
+  font-family: "Cormorant Garamond", "EB Garamond", "Tiempos Headline", Garamond, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--kf-ink);
 }
 
-.scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #303636;
-  border-radius: 99px;
+/* ---------- Motion ---------- */
+@keyframes kf-page-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.kf-page-in { animation: kf-page-in 0.22s ease-out both; }
+
+@keyframes kf-fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.kf-fade-up { animation: kf-fade-up 0.32s ease-out both; }
+
+.kf-stagger > * { animation: kf-fade-up 0.36s ease-out both; }
+.kf-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.kf-stagger > *:nth-child(2) { animation-delay: 60ms; }
+.kf-stagger > *:nth-child(3) { animation-delay: 120ms; }
+.kf-stagger > *:nth-child(4) { animation-delay: 180ms; }
+.kf-stagger > *:nth-child(5) { animation-delay: 240ms; }
+.kf-stagger > *:nth-child(6) { animation-delay: 300ms; }
+
+@keyframes kf-confetti-fall {
+  0%   { transform: translate3d(0, -12vh, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate3d(var(--drift, 0), 112vh, 0) rotate(var(--spin, 720deg)); opacity: 0.95; }
+}
+.kf-confetti-piece {
+  position: absolute;
+  top: 0;
+  border-radius: 2px;
+  animation-name: kf-confetti-fall;
+  animation-timing-function: cubic-bezier(0.15, 0.6, 0.35, 1);
+  animation-fill-mode: forwards;
+  will-change: transform;
 }
 
-.recharts-wrapper,
-.recharts-surface {
-  overflow: visible;
+@keyframes kf-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.45; transform: scale(1.35); }
 }
+.kf-pulse { animation: kf-pulse 1.8s ease-in-out infinite; }
 
-.recharts-cartesian-grid-horizontal line,
-.recharts-cartesian-grid-vertical line {
-  stroke: rgba(255,255,255,.07);
+@keyframes kf-theme-fade {
+  from { opacity: 0.4; }
+  to   { opacity: 1; }
 }
+.kf-theme-fade { animation: kf-theme-fade 0.2s ease-out both; }
 
-.recharts-tooltip-cursor {
-  stroke: rgba(255,255,255,.2);
-}
+/* ---------- Form ---------- */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; }
+input[type="date"] { direction: ltr; }
 
-@keyframes pulse-soft {
-  0%, 100% { opacity: .55; }
-  50% { opacity: 1; }
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { height: 8px; width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--kf-hairline);
+  border-radius: 999px;
 }
-
-.dot-pulse {
-  animation: pulse-soft 2.2s ease-in-out infinite;
-}
+::-webkit-scrollbar-thumb:hover { background: var(--kf-muted-soft); }
