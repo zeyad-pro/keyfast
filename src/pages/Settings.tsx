@@ -46,16 +46,16 @@ export function Settings() {
     <div className="mx-auto max-w-[860px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24 kf-page-in">
       {/* Heading */}
       <div className="mb-12">
-        <div className="mb-4 inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-[var(--kf-muted)]">
+        <div className="mb-4 inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-(--kf-muted)">
           <SettingsIcon size={12} /> {t.settings}
         </div>
-        <h1 className="font-display text-4xl leading-[1.1] tracking-tight text-[var(--kf-ink)] sm:text-5xl">
+        <h1 className="font-display text-4xl leading-[1.1] tracking-tight text-(--kf-ink) sm:text-5xl">
           {t.settings}
         </h1>
       </div>
 
       {/* Form card */}
-      <section className="rounded-lg border border-[var(--kf-hairline)] bg-[var(--kf-canvas)] p-6 sm:p-8">
+      <section className="rounded-lg border border-(--kf-hairline) bg-(--kf-canvas) p-6 sm:p-8">
         <div className="grid gap-6 sm:grid-cols-2">
           <Field label={t.settingsStart}>
             <DateInput
@@ -74,7 +74,7 @@ export function Settings() {
               min="0"
               value={goalDays}
               onChange={(e) => setGoalDays(e.target.value)}
-              className="h-11 w-full rounded-md border border-[var(--kf-hairline)] bg-[var(--kf-canvas)] px-3 text-sm text-[var(--kf-ink)] outline-none transition-colors duration-150 focus:border-[var(--kf-primary)]"
+              className="h-11 w-full rounded-md border border-(--kf-hairline) bg-(--kf-canvas) px-3 text-sm text-(--kf-ink) outline-none transition-colors duration-150 focus:border-(--kf-primary)"
             />
           </Field>
 
@@ -84,7 +84,7 @@ export function Settings() {
               step="any"
               value={baselineWpm}
               onChange={(e) => setBaselineWpm(e.target.value)}
-              className="h-11 w-full rounded-md border border-[var(--kf-hairline)] bg-[var(--kf-canvas)] px-3 text-sm text-[var(--kf-ink)] outline-none transition-colors duration-150 focus:border-[var(--kf-primary)]"
+              className="h-11 w-full rounded-md border border-(--kf-hairline) bg-(--kf-canvas) px-3 text-sm text-(--kf-ink) outline-none transition-colors duration-150 focus:border-(--kf-primary)"
             />
           </Field>
 
@@ -94,21 +94,21 @@ export function Settings() {
               step="any"
               value={baselineAcc}
               onChange={(e) => setBaselineAcc(e.target.value)}
-              className="h-11 w-full rounded-md border border-[var(--kf-hairline)] bg-[var(--kf-canvas)] px-3 text-sm text-[var(--kf-ink)] outline-none transition-colors duration-150 focus:border-[var(--kf-primary)]"
+              className="h-11 w-full rounded-md border border-(--kf-hairline) bg-(--kf-canvas) px-3 text-sm text-(--kf-ink) outline-none transition-colors duration-150 focus:border-(--kf-primary)"
             />
           </Field>
         </div>
 
-        <div className="mt-8 flex flex-wrap gap-2 border-t border-[var(--kf-hairline-soft)] pt-6">
+        <div className="mt-8 flex flex-wrap gap-2 border-t border-(--kf-hairline-soft) pt-6">
           <button
             onClick={save}
-            className="inline-flex h-11 items-center gap-2 rounded-md bg-[var(--kf-primary)] px-5 text-sm font-medium text-[var(--kf-on-primary)] transition-colors duration-150 hover:bg-[var(--kf-primary-active)]"
+            className="inline-flex h-11 items-center gap-2 rounded-md bg-(--kf-primary) px-5 text-sm font-medium text-(--kf-on-primary) transition-colors duration-150 hover:bg-(--kf-primary-active)"
           >
             <Save size={15} /> {t.save}
           </button>
           <button
             onClick={onReset}
-            className="inline-flex h-11 items-center gap-2 rounded-md border border-[var(--kf-hairline)] px-5 text-sm text-[var(--kf-body)] transition-colors duration-150 hover:border-[var(--kf-error)]/50 hover:text-[var(--kf-error)]"
+            className="inline-flex h-11 items-center gap-2 rounded-md border border-(--kf-hairline) px-5 text-sm text-(--kf-body) transition-colors duration-150 hover:border-(--kf-error)/50 hover:text-(--kf-error)"
           >
             <RotateCcw size={15} /> {t.reset}
           </button>
@@ -127,7 +127,7 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-2 block text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--kf-muted)]">
+      <span className="mb-2 block text-[10px] font-medium uppercase tracking-[0.16em] text-(--kf-muted)">
         {label}
       </span>
       {children}

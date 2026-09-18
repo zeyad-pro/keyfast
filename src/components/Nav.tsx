@@ -32,7 +32,7 @@ export function Nav({
   ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--kf-hairline)] bg-[var(--kf-canvas)]/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-40 border-b border-(--kf-hairline) bg-(--kf-canvas)/95 backdrop-blur-sm">
       <div className="mx-auto flex h-16 max-w-[1200px] items-center gap-4 px-4 sm:px-6 lg:px-8">
         <button
           onClick={() => onNavigate("dashboard")}
@@ -51,8 +51,8 @@ export function Nav({
                 onClick={() => onNavigate(it.id)}
                 className={`inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors duration-150 ${
                   active
-                    ? "bg-[var(--kf-surface-card)] text-[var(--kf-ink)]"
-                    : "text-[var(--kf-muted)] hover:text-[var(--kf-ink)]"
+                    ? "bg-(--kf-surface-card) text-(--kf-ink)"
+                    : "text-(--kf-muted) hover:text-(--kf-ink)"
                 }`}
               >
                 {it.icon}
@@ -66,7 +66,7 @@ export function Nav({
           <ThemeToggle />
           <button
             onClick={() => setLang(lang === "en" ? "ar" : "en")}
-            className="inline-flex h-9 items-center gap-2 rounded-md border border-[var(--kf-hairline)] px-3 text-sm text-[var(--kf-body)] transition-colors duration-150 hover:border-[var(--kf-ink)]/30"
+            className="inline-flex h-9 items-center gap-2 rounded-md border border-(--kf-hairline) px-3 text-sm text-(--kf-body) transition-colors duration-150 hover:border-(--kf-ink)/30"
           >
             <Languages size={14} />
             <span className="hidden sm:inline">
@@ -77,7 +77,7 @@ export function Nav({
       </div>
 
       {/* mobile sub-nav */}
-      <nav className="flex gap-1 overflow-x-auto border-t border-[var(--kf-hairline-soft)] px-3 py-2 sm:hidden">
+      <nav className="flex gap-1 overflow-x-auto border-t border-(--kf-hairline-soft) px-3 py-2 sm:hidden">
         {items.map((it) => {
           const active = page === it.id;
           return (
@@ -86,8 +86,8 @@ export function Nav({
               onClick={() => onNavigate(it.id)}
               className={`inline-flex shrink-0 items-center gap-2 rounded-md px-3 py-1.5 text-xs font-medium transition-colors duration-150 ${
                 active
-                  ? "bg-[var(--kf-surface-card)] text-[var(--kf-ink)]"
-                  : "text-[var(--kf-muted)]"
+                  ? "bg-(--kf-surface-card) text-(--kf-ink)"
+                  : "text-(--kf-muted)"
               }`}
             >
               {it.icon}

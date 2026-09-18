@@ -39,7 +39,7 @@ function Shell() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-[var(--kf-canvas)]">
+    <div className="flex min-h-screen flex-col bg-(--kf-canvas)">
       <Nav page={page} onNavigate={navigate} />
 
       <main key={flashKey} className="flex-1 kf-theme-fade">
@@ -49,9 +49,9 @@ function Shell() {
         {page === "settings" && <Settings />}
       </main>
 
-      <footer className="border-t border-[var(--kf-hairline)] bg-[var(--kf-canvas)]">
+      <footer className="border-t border-(--kf-hairline) bg-(--kf-canvas)">
         <div className="mx-auto flex max-w-[1200px] flex-col items-start justify-between gap-6 px-4 py-10 sm:flex-row sm:items-center sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 text-xs text-[var(--kf-muted)]">
+          <div className="flex items-center gap-2 text-xs text-(--kf-muted)">
             <SpikeMark size={14} color="var(--kf-muted)" />
             <span>KeyFast · {new Date().getFullYear()}</span>
           </div>
@@ -61,7 +61,7 @@ function Shell() {
               href="https://github.com/zeyad-pro/keyfast"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-md border border-[var(--kf-hairline)] px-4 py-2 text-xs text-[var(--kf-body)] transition-colors duration-150 hover:border-[var(--kf-ink)]/30"
+              className="inline-flex items-center gap-2 rounded-md border border-(--kf-hairline) px-4 py-2 text-xs text-(--kf-body) transition-colors duration-150 hover:border-(--kf-ink)/30"
             >
               <Github size={13} />
               {t.githubSource}
@@ -71,13 +71,13 @@ function Shell() {
               href="http://prex-sand.vercel.app/"
               target="_blank"
               rel="noreferrer"
-              className="group inline-flex items-center gap-2 rounded-md border border-[var(--kf-hairline)] px-4 py-2 text-xs text-[var(--kf-body)] transition-colors duration-150 hover:border-[var(--kf-ink)]/30"
+              className="group inline-flex items-center gap-2 rounded-md border border-(--kf-hairline) px-4 py-2 text-xs text-(--kf-body) transition-colors duration-150 hover:border-(--kf-ink)/30"
             >
-              <span className="text-[var(--kf-muted)]">Made by</span>
-              <span className="font-display text-sm tracking-tight text-[var(--kf-primary)]">
+              <span className="text-(--kf-muted)">Made by</span>
+              <span className="font-display text-sm tracking-tight text-(--kf-primary)">
                 PREX
               </span>
-              <span className="text-[var(--kf-muted)] transition-colors duration-150 group-hover:text-[var(--kf-ink)]">
+              <span className="text-(--kf-muted) transition-colors duration-150 group-hover:text-(--kf-ink)">
                 ↗
               </span>
             </a>

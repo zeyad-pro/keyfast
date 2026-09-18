@@ -167,7 +167,7 @@ export function Dashboard({ onNavigate }: { onNavigate: (p: Page) => void }) {
   const isEmpty = chartData.length === 0;
   const dash = isEmpty ? "—" : null;
   return (
-    <div className="mx-auto max-w-[1200px] px-4 py-16 sm:px-6 lg:px-8 lg:py-20 kf-page-in">
+    <div className="mx-auto max-w-300 px-4 py-16 sm:px-6 lg:px-8 lg:py-20 kf-page-in">
       {welcome && (
         <Portal>
           <div className="fixed inset-0 z-80 flex items-center justify-center bg-(--kf-canvas)/85 px-4 backdrop-blur-sm kf-fade-up">
@@ -254,22 +254,22 @@ export function Dashboard({ onNavigate }: { onNavigate: (p: Page) => void }) {
       <section className="mb-16">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="mb-2 text-xs uppercase tracking-[0.18em] text-[var(--kf-muted)]">
+            <p className="mb-2 text-xs uppercase tracking-[0.18em] text-(--kf-muted)">
               {t.performanceEyebrow}
             </p>
-            <h2 className="font-display text-3xl tracking-tight text-[var(--kf-ink)]">
+            <h2 className="font-display text-3xl tracking-tight text-(--kf-ink)">
               {t.performanceTitle}
             </h2>
           </div>
 
           {/* View toggle */}
-          <div className="inline-flex rounded-md border border-[var(--kf-hairline)] p-0.5">
+          <div className="inline-flex rounded-md border border-(--kf-hairline) p-0.5">
             <button
               onClick={() => setViewMode("entries")}
               className={`rounded px-3 py-1 text-xs font-medium transition-colors duration-150 ${
                 viewMode === "entries"
-                  ? "bg-[var(--kf-surface-card)] text-[var(--kf-ink)]"
-                  : "text-[var(--kf-muted)] hover:text-[var(--kf-ink)]"
+                  ? "bg-(--kf-surface-card) text-(--kf-ink)"
+                  : "text-(--kf-muted) hover:text-(--kf-ink)"
               }`}
             >
               {t.viewEntries}
@@ -278,8 +278,8 @@ export function Dashboard({ onNavigate }: { onNavigate: (p: Page) => void }) {
               onClick={() => setViewMode("full")}
               className={`rounded px-3 py-1 text-xs font-medium transition-colors duration-150 ${
                 viewMode === "full"
-                  ? "bg-[var(--kf-surface-card)] text-[var(--kf-ink)]"
-                  : "text-[var(--kf-muted)] hover:text-[var(--kf-ink)]"
+                  ? "bg-(--kf-surface-card) text-(--kf-ink)"
+                  : "text-(--kf-muted) hover:text-(--kf-ink)"
               }`}
             >
               {t.viewFull}
@@ -356,79 +356,82 @@ export function Dashboard({ onNavigate }: { onNavigate: (p: Page) => void }) {
           </div>
         </div>
 
-    {chartData.length === 0 ? (
-  <div className="flex min-h-44 flex-col items-center justify-center gap-3 p-10 text-center">
-    <CalendarDays size={26} className="text-[var(--kf-muted)]" />
-    <p className="font-display text-2xl text-[var(--kf-ink)]">{t.emptyTitle}</p>
-    <p className="text-sm text-[var(--kf-muted)]">{t.emptyBody}</p>
-    <button
-      onClick={() => onNavigate("new")}
-      className="mt-2 inline-flex h-9 items-center gap-2 rounded-md bg-[var(--kf-primary)] px-4 text-xs font-medium text-[var(--kf-on-primary)] transition-colors duration-150 hover:bg-[var(--kf-primary-active)]"
-    >
-      {t.welcomeAdd}
-    </button>
-  </div>
-) : (
-  <div className="overflow-x-auto">
-    <table className="w-full min-w-[640px] text-left">
-      <thead>
-        <tr className="border-b border-[var(--kf-hairline)] text-[10px] uppercase tracking-[0.14em] text-[var(--kf-muted)]">
-          <th className="px-6 py-3 font-medium">{t.day}</th>
-          <th className="px-6 py-3 font-medium">{t.date}</th>
-          <th className="px-6 py-3 font-medium">{t.wpm}</th>
-          <th className="px-6 py-3 font-medium">{t.accuracy}</th>
-          <th className="px-6 py-3 text-right font-medium">{t.actions}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {chartData.map((entry) => (
-          <tr
-            key={entry.id}
-            className="border-b border-[var(--kf-hairline-soft)] text-sm last:border-0 transition-colors duration-150 hover:bg-[var(--kf-surface-soft)]"
-          >
-            <td className="px-6 py-3.5">
-              <span className="inline-flex h-6 min-w-8 items-center justify-center rounded-md bg-[var(--kf-surface-card)] px-2 text-xs font-medium text-[var(--kf-ink)]">
-                {entry.day}
-              </span>
-            </td>
-            <td className="px-6 py-3.5 text-[var(--kf-body)]">
-              {formatDate(entry.date, lang)}
-            </td>
-            <td className="px-6 py-3.5 font-medium text-[var(--kf-primary)]">
-              {entry.wpm} <span className="text-[10px] text-[var(--kf-muted)]">WPM</span>
-            </td>
-            <td className="px-6 py-3.5 font-medium text-[var(--kf-accent-teal)]">
-              {entry.accuracy}%
-            </td>
-            <td className="px-6 py-3.5">
-              <div className="flex justify-end gap-1">
-                <button
-                  onClick={() => {
-                    sessionStorage.setItem("keyfast.edit", entry.id);
-                    onNavigate("new");
-                  }}
-                  className="rounded-md p-2 text-[var(--kf-muted)] transition-colors duration-150 hover:bg-[var(--kf-surface-card)] hover:text-[var(--kf-ink)]"
-                  aria-label="Edit"
-                >
-                  <Edit3 size={14} />
-                </button>
-                <button
-                  onClick={() => deleteEntry(entry.id)}
-                  className="rounded-md p-2 text-[var(--kf-muted)] transition-colors duration-150 hover:bg-[var(--kf-surface-card)] hover:text-[var(--kf-error)]"
-                  aria-label="Delete"
-                >
-                  <Trash2 size={14} />
-                </button>
-              </div>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-)}
-
-        
+        {chartData.length === 0 ? (
+          <div className="flex min-h-44 flex-col items-center justify-center gap-3 p-10 text-center">
+            <CalendarDays size={26} className="text-(--kf-muted)" />
+            <p className="font-display text-2xl text-(--kf-ink)">
+              {t.emptyTitle}
+            </p>
+            <p className="text-sm text-(--kf-muted)">{t.emptyBody}</p>
+            <button
+              onClick={() => onNavigate("new")}
+              className="mt-2 inline-flex h-9 items-center gap-2 rounded-md bg-(--kf-primary) px-4 text-xs font-medium text-(--kf-on-primary) transition-colors duration-150 hover:bg-(--kf-primary-active)"
+            >
+              {t.welcomeAdd}
+            </button>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-160 text-left">
+              <thead>
+                <tr className="border-b border-(--kf-hairline) text-[10px] uppercase tracking-[0.14em] text-(--kf-muted)">
+                  <th className="px-6 py-3 font-medium">{t.day}</th>
+                  <th className="px-6 py-3 font-medium">{t.date}</th>
+                  <th className="px-6 py-3 font-medium">{t.wpm}</th>
+                  <th className="px-6 py-3 font-medium">{t.accuracy}</th>
+                  <th className="px-6 py-3 text-right font-medium">
+                    {t.actions}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {chartData.map((entry) => (
+                  <tr
+                    key={entry.id}
+                    className="border-b border-(--kf-hairline-soft) text-sm last:border-0 transition-colors duration-150 hover:bg-(--kf-surface-soft)"
+                  >
+                    <td className="px-6 py-3.5">
+                      <span className="inline-flex h-6 min-w-8 items-center justify-center rounded-md bg-(--kf-surface-card) px-2 text-xs font-medium text-(--kf-ink)">
+                        {entry.day}
+                      </span>
+                    </td>
+                    <td className="px-6 py-3.5 text-(--kf-body)">
+                      {formatDate(entry.date, lang)}
+                    </td>
+                    <td className="px-6 py-3.5 font-medium text-(--kf-primary)">
+                      {entry.wpm}{" "}
+                      <span className="text-[10px] text-(--kf-muted)">WPM</span>
+                    </td>
+                    <td className="px-6 py-3.5 font-medium text-(--kf-accent-teal)">
+                      {entry.accuracy}%
+                    </td>
+                    <td className="px-6 py-3.5">
+                      <div className="flex justify-end gap-1">
+                        <button
+                          onClick={() => {
+                            sessionStorage.setItem("keyfast.edit", entry.id);
+                            onNavigate("new");
+                          }}
+                          className="rounded-md p-2 text-(--kf-muted) transition-colors duration-150 hover:bg-(--kf-surface-card) hover:text-(--kf-ink)"
+                          aria-label="Edit"
+                        >
+                          <Edit3 size={14} />
+                        </button>
+                        <button
+                          onClick={() => deleteEntry(entry.id)}
+                          className="rounded-md p-2 text-(--kf-muted) transition-colors duration-150 hover:bg-(--kf-surface-card) hover:text-(--kf-error)"
+                          aria-label="Delete"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </section>
     </div>
   );

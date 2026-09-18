@@ -62,9 +62,8 @@ export type Dict = {
   viewFull: string;
   futureDate: string;
 
-
   performanceEyebrow: string;
-performanceTitle: string;
+  performanceTitle: string;
 
   history: string;
   recordedDays: string;
@@ -128,9 +127,8 @@ export const translations: Record<"en" | "ar", Dict> = {
     invalidDateFormat: "Enter date as dd/mm/yyyy",
     githubSource: "Source on GitHub",
 
-
-      performanceEyebrow: "Performance",
-performanceTitle: "Three views of your progress",
+    performanceEyebrow: "Performance",
+    performanceTitle: "Three views of your progress",
 
     viewEntries: "Completed only",
     viewFull: "Full timeline",
@@ -212,7 +210,7 @@ performanceTitle: "Three views of your progress",
     themeDark: "الوضع الداكن",
 
     performanceEyebrow: "الأداء",
-performanceTitle: "ثلاث زوايا لتقدمك",
+    performanceTitle: "ثلاث زوايا لتقدمك",
 
     streak: "سلسلة الأيام",
     current: "السرعة الحالية",
