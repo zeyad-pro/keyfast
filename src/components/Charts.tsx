@@ -34,6 +34,7 @@ export function ChartCard({
   accLabel,
   baselineLabel,
   dayLabel,
+  maxDay: maxDayProp,
 }: {
   data: ChartDatum[];
   type: ChartType;
@@ -44,29 +45,47 @@ export function ChartCard({
   accLabel: string;
   baselineLabel: string;
   dayLabel: string;
+  maxDay?: number;
 }) {
-  const maxDay = Math.max(30, ...data.map((d) => d.day));
-  const ticks = Array.from({ length: maxDay }, (_, i) => i + 1);
+  const dataMax = data.length ? Math.max(...data.map((d) => d.day)) : 1;
+  const maxDay = maxDayProp ?? Math.max(1, dataMax);
+
+  const step =
+    maxDay <= 15
+      ? 1
+      : maxDay <= 30
+        ? 2
+        : maxDay <= 60
+          ? 5
+          : Math.ceil(maxDay / 12);
+
+  const ticks = Array.from(
+    { length: Math.ceil(maxDay / step) + 1 },
+    (_, i) => i * step + 1,
+  ).filter((t) => t <= maxDay);
+
+  if (ticks[ticks.length - 1] !== maxDay) ticks.push(maxDay);
+
   const showWpm = type === "speed" || type === "both";
   const showAcc = type === "accuracy" || type === "both";
 
   return (
-    <div className="rounded-lg border border-[var(--kf-hairline)] bg-[var(--kf-canvas)] p-6 sm:p-8">
+    <div className="rounded-lg border border-(--kf-hairline) bg-(--kf-canvas) p-6 sm:p-8">
       {/* Header */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <h3 className="font-display text-xl tracking-tight text-[var(--kf-ink)]">
+        <h3 className="font-display text-xl tracking-tight text-(--kf-ink)">
           {title}
         </h3>
-        <div className="flex gap-4 text-xs text-[var(--kf-muted)]">
+        <div className="flex gap-4 text-xs text-(--kf-muted)">
           {showWpm && (
             <span className="inline-flex items-center gap-2">
-              <i className="h-0.5 w-5 bg-[var(--kf-primary)]" />
+              <i className="h-0.5 w-5 bg-(--kf-primary)" />
               {wpmLabel}
             </span>
           )}
           {showAcc && (
             <span className="inline-flex items-center gap-2">
-              <i className="h-0.5 w-5 bg-[var(--kf-accent-teal)]" />
+              <i className="h-0.5 w-5 bg-(--kf-accent-teal)" />
               {accLabel}
             </span>
           )}
@@ -76,7 +95,10 @@ export function ChartCard({
       {/* Chart */}
       <div className="h-[260px] w-full">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 8, right: 8, left: -18, bottom: 0 }}>
+          <LineChart
+            data={data}
+            margin={{ top: 8, right: 8, left: -18, bottom: 0 }}
+          >
             <CartesianGrid
               stroke="var(--kf-hairline)"
               strokeDasharray="2 4"
@@ -91,7 +113,8 @@ export function ChartCard({
               tick={{ fill: "var(--kf-muted)", fontSize: 11 }}
               tickLine={false}
               axisLine={{ stroke: "var(--kf-hairline)" }}
-              interval={Math.max(0, Math.floor(maxDay / 12) - 1)}
+              interval={0}
+              tickFormatter={(v) => `${v}`}
             />
 
             {showWpm && (
@@ -214,8 +237,8 @@ function ChartTooltip({
   if (!active || !payload?.length) return null;
 
   return (
-    <div className="rounded-md border border-[var(--kf-hairline)] bg-[var(--kf-surface-card)] px-3 py-2 text-xs">
-      <p className="mb-1 text-[10px] uppercase tracking-widest text-[var(--kf-muted)]">
+    <div className="rounded-md border border-(--kf-hairline) bg-(--kf-surface-card) px-3 py-2 text-xs">
+      <p className="mb-1 text-[10px] uppercase tracking-widest text-(--kf-muted)">
         {dayLabel} {label}
       </p>
       {payload.map((item) => (
@@ -224,8 +247,8 @@ function ChartTooltip({
             className="inline-block h-2 w-2 rounded-full"
             style={{ background: item.color }}
           />
-          <span className="text-[var(--kf-body)]">{item.name}</span>
-          <span className="ml-auto font-medium text-[var(--kf-ink)]">
+          <span className="text-(--kf-body)">{item.name}</span>
+          <span className="ml-auto font-medium text-(--kf-ink)">
             {item.value}
             {item.name.toLowerCase().includes("accuracy") ||
             item.name.includes("دقة")

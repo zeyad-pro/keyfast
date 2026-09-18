@@ -1,11 +1,23 @@
 import {
-  createContext, useCallback, useContext, useEffect, useMemo, useState,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
   type ReactNode,
 } from "react";
 import {
-  type Entry, type Settings,
-  defaultSettings, loadEntries, loadLang, loadSettings,
-  makeId, saveEntries, saveLang, saveSettings,
+  type Entry,
+  type Settings,
+  defaultSettings,
+  loadEntries,
+  loadLang,
+  loadSettings,
+  makeId,
+  saveEntries,
+  saveLang,
+  saveSettings,
 } from "../lib/tracker";
 import { translations, type Lang, type Dict } from "../lib/i18n";
 import { type Theme, loadTheme, saveTheme, applyTheme } from "../lib/theme";
@@ -47,9 +59,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const t = translations[lang];
 
-  useEffect(() => { applyTheme(theme); saveTheme(theme); }, [theme]);
-  useEffect(() => { saveEntries(entries); }, [entries]);
-  useEffect(() => { saveSettings(settings); }, [settings]);
+  useEffect(() => {
+    applyTheme(theme);
+    saveTheme(theme);
+  }, [theme]);
+  useEffect(() => {
+    saveEntries(entries);
+  }, [entries]);
+  useEffect(() => {
+    saveSettings(settings);
+  }, [settings]);
   useEffect(() => {
     saveLang(lang);
     document.documentElement.lang = lang;
@@ -68,27 +87,33 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }, 3600);
   }, []);
 
-  const toast = useMemo(() => ({
-    success: (msg: string) => pushToast("success", msg),
-    error: (msg: string) => pushToast("error", msg),
-    info: (msg: string) => pushToast("info", msg),
-  }), [pushToast]);
+  const toast = useMemo(
+    () => ({
+      success: (msg: string) => pushToast("success", msg),
+      error: (msg: string) => pushToast("error", msg),
+      info: (msg: string) => pushToast("info", msg),
+    }),
+    [pushToast],
+  );
 
   const updateSettings = useCallback((patch: Partial<Settings>) => {
     setSettings((curr) => ({ ...curr, ...patch }));
   }, []);
 
-  const addEntry = useCallback((e: Omit<Entry, "id">) => {
-    setEntries((curr) => {
-      const next = [...curr, { ...e, id: makeId() }];
-      if (curr.length === 0) {
-        setSettings((s) => ({ ...s, startDate: e.date }));
-      } else if (e.date < settings.startDate) {
-        setSettings((s) => ({ ...s, startDate: e.date }));
-      }
-      return next;
-    });
-  }, [settings.startDate]);
+  const addEntry = useCallback(
+    (e: Omit<Entry, "id">) => {
+      setEntries((curr) => {
+        const next = [...curr, { ...e, id: makeId() }];
+        if (curr.length === 0) {
+          setSettings((s) => ({ ...s, startDate: e.date }));
+        } else if (e.date < settings.startDate) {
+          setSettings((s) => ({ ...s, startDate: e.date }));
+        }
+        return next;
+      });
+    },
+    [settings.startDate],
+  );
 
   const updateEntry = useCallback((id: string, e: Omit<Entry, "id">) => {
     setEntries((curr) => curr.map((x) => (x.id === id ? { ...e, id } : x)));
@@ -109,15 +134,43 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setEntries([]);
   }, []);
 
-  const value = useMemo<Ctx>(() => ({
-    entries, settings, lang, theme, t, toasts, toast, dismissToast,
-    addEntry, updateEntry, deleteEntry, updateSettings,
-    setLang: setLangState, setTheme, toggleTheme, reset,
-  }), [
-    entries, settings, lang, theme, t, toasts, toast, dismissToast,
-    addEntry, updateEntry, deleteEntry, updateSettings,
-    setTheme, toggleTheme, reset,
-  ]);
+  const value = useMemo<Ctx>(
+    () => ({
+      entries,
+      settings,
+      lang,
+      theme,
+      t,
+      toasts,
+      toast,
+      dismissToast,
+      addEntry,
+      updateEntry,
+      deleteEntry,
+      updateSettings,
+      setLang: setLangState,
+      setTheme,
+      toggleTheme,
+      reset,
+    }),
+    [
+      entries,
+      settings,
+      lang,
+      theme,
+      t,
+      toasts,
+      toast,
+      dismissToast,
+      addEntry,
+      updateEntry,
+      deleteEntry,
+      updateSettings,
+      setTheme,
+      toggleTheme,
+      reset,
+    ],
+  );
 
   return <AppCtx.Provider value={value}>{children}</AppCtx.Provider>;
 }

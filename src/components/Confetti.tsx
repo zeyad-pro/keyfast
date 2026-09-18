@@ -16,7 +16,7 @@ type Piece = {
 };
 
 const COLORS_BY_THEME: Record<"dark" | "light", string[]> = {
-  dark:  ["#6b9bff", "#6ec5bb", "#d8a35a", "#eef2f8", "#1a1f2a"],
+  dark: ["#6b9bff", "#6ec5bb", "#d8a35a", "#eef2f8", "#1a1f2a"],
   light: ["#3b6dd1", "#4a9d94", "#b8863b", "#14161a", "#efece2"],
 };
 
@@ -48,22 +48,24 @@ export function Confetti({ fireKey }: { fireKey: number }) {
 
   return (
     <Portal>
-      <div className="pointer-events-none fixed inset-0 z-[100] overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 z-100 overflow-hidden">
         {pieces.map((p) => (
           <span
             key={p.id}
             className="kf-confetti-piece"
-            style={{
-              left: `${p.left}%`,
-              width: p.width,
-              height: p.height,
-              background: p.color,
-              borderRadius: p.round ? "999px" : "2px",
-              animationDelay: `${p.delay}s`,
-              animationDuration: `${p.duration}s`,
-              ["--drift" as string]: `${p.drift}px`,
-              ["--spin" as string]: `${p.spin}deg`,
-            } as React.CSSProperties}
+            style={
+              {
+                left: `${p.left}%`,
+                width: p.width,
+                height: p.height,
+                background: p.color,
+                borderRadius: p.round ? "999px" : "2px",
+                animationDelay: `${p.delay}s`,
+                animationDuration: `${p.duration}s`,
+                ["--drift" as string]: `${p.drift}px`,
+                ["--spin" as string]: `${p.spin}deg`,
+              } as React.CSSProperties
+            }
           />
         ))}
       </div>

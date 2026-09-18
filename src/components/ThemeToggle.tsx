@@ -11,7 +11,7 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       aria-label={isDark ? t.themeLight : t.themeDark}
       title={isDark ? t.themeLight : t.themeDark}
-      className="relative inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--kf-hairline)] text-[var(--kf-body)] transition-colors duration-150 hover:border-[var(--kf-ink)]/30 hover:text-[var(--kf-ink)]"
+      className="relative inline-flex h-9 w-9 items-center justify-center rounded-md border border-(--kf-hairline) text-(--kf-body) transition-colors duration-150 hover:border-(--kf-ink)/30 hover:text-(--kf-ink)"
     >
       <span className="relative inline-block h-4 w-4">
         <Sun

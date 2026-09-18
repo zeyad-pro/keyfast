@@ -1,4 +1,10 @@
-export function SpikeMark({ size = 16, color = "currentColor" }: { size?: number; color?: string }) {
+export function SpikeMark({
+  size = 16,
+  color = "currentColor",
+}: {
+  size?: number;
+  color?: string;
+}) {
   return (
     <svg width={size} height={size} viewBox="0 0 20 20" aria-hidden>
       <path
@@ -17,9 +23,11 @@ export function Wordmark({ size = "base" }: { size?: "sm" | "base" | "lg" }) {
   const cls =
     size === "lg" ? "text-2xl" : size === "sm" ? "text-sm" : "text-lg";
   return (
-    <span className={`inline-flex items-baseline gap-0.5 font-display tracking-tight ${cls}`}>
-      <span className="text-[var(--kf-ink)]">Key</span>
-      <span className="text-[var(--kf-primary)]">Fast</span>
+    <span
+      className={`inline-flex items-baseline gap-0.5 font-display tracking-tight ${cls}`}
+    >
+      <span className="text-(--kf-ink)">Key</span>
+      <span className="text-(--kf-primary)">Fast</span>
     </span>
   );
 }

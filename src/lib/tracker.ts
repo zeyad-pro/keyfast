@@ -45,7 +45,8 @@ export const formatShortDate = (value: string, lang: "en" | "ar" = "en") =>
     month: "short",
   });
 
-export const makeId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+export const makeId = () =>
+  `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
 /* ---------- settings ---------- */
 export function defaultSettings(): Settings {
@@ -66,7 +67,9 @@ export function loadSettings(): Settings {
 }
 
 export function saveSettings(s: Settings) {
-  try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); } catch {}
+  try {
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+  } catch {}
 }
 
 /* ---------- entries ---------- */
@@ -75,12 +78,11 @@ export function loadEntries(): Entry[] {
     const raw = localStorage.getItem(ENTRIES_KEY);
     if (raw) {
       const parsed = JSON.parse(raw) as Entry[];
-      if (Array.isArray(parsed)) return parsed; 
+      if (Array.isArray(parsed)) return parsed;
     }
   } catch {}
   return [];
 
-  
   // {
   //   id: makeId(),
   //   date: startDate,
@@ -90,7 +92,9 @@ export function loadEntries(): Entry[] {
 }
 
 export function saveEntries(entries: Entry[]) {
-  try { localStorage.setItem(ENTRIES_KEY, JSON.stringify(entries)); } catch {}
+  try {
+    localStorage.setItem(ENTRIES_KEY, JSON.stringify(entries));
+  } catch {}
 }
 
 /* ---------- language ---------- */
@@ -99,7 +103,9 @@ export function loadLang(): "en" | "ar" {
   return v === "ar" ? "ar" : "en";
 }
 export function saveLang(lang: "en" | "ar") {
-  try { localStorage.setItem(LANG_KEY, lang); } catch {}
+  try {
+    localStorage.setItem(LANG_KEY, lang);
+  } catch {}
 }
 
 /* ---------- streak ---------- */

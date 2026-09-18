@@ -58,6 +58,10 @@ export type Dict = {
   invalidDate: string;
   duplicate: string;
 
+  viewEntries: string;
+viewFull: string;
+futureDate: string;
+
   history: string;
   recordedDays: string;
   actions: string;
@@ -119,6 +123,10 @@ export const translations: Record<"en" | "ar", Dict> = {
     dateFormat: "Format: dd/mm/yyyy",
     invalidDateFormat: "Enter date as dd/mm/yyyy",
     githubSource: "Source on GitHub",
+
+    viewEntries: "Completed only",
+viewFull: "Full timeline",
+futureDate: "You can't log a future date.",
 
     // charts
     chartSpeed: "Speed over time",
@@ -241,6 +249,10 @@ export const translations: Record<"en" | "ar", Dict> = {
     invalidAccuracy: "الدقة يجب أن تكون بين 0 و100.",
     invalidDate: "التاريخ خارج النطاق المسجّل.",
     duplicate: "في نتيجة مسجلة بالفعل في التاريخ ده.",
+
+    viewEntries: "المسجّل بس",
+viewFull: "الجدول كامل",
+futureDate: "مش مسموح تسجّل تاريخ في المستقبل.",
 
     history: "السجل",
     recordedDays: "الأيام المسجلة",

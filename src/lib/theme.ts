@@ -8,7 +8,9 @@ export function loadTheme(): Theme {
 }
 
 export function saveTheme(theme: Theme) {
-  try { localStorage.setItem(THEME_KEY, theme); } catch {}
+  try {
+    localStorage.setItem(THEME_KEY, theme);
+  } catch {}
 }
 
 export function applyTheme(theme: Theme) {
