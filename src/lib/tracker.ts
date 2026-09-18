@@ -7,7 +7,7 @@ export type Entry = {
 
 export type Settings = {
   startDate: string;
-  goalDays: number; // 0 = لا نهائي
+  goalDays: number;
   baselineWpm: number;
   baselineAccuracy: number;
 };
@@ -70,20 +70,23 @@ export function saveSettings(s: Settings) {
 }
 
 /* ---------- entries ---------- */
-export function loadEntries(startDate: string, baselineWpm: number, baselineAccuracy: number): Entry[] {
+export function loadEntries(): Entry[] {
   try {
     const raw = localStorage.getItem(ENTRIES_KEY);
     if (raw) {
       const parsed = JSON.parse(raw) as Entry[];
-      if (Array.isArray(parsed) && parsed.length) return parsed;
+      if (Array.isArray(parsed)) return parsed; 
     }
   } catch {}
-  return [{
-    id: makeId(),
-    date: startDate,
-    wpm: baselineWpm,
-    accuracy: baselineAccuracy,
-  }];
+  return [];
+
+  
+  // {
+  //   id: makeId(),
+  //   date: startDate,
+  //   wpm: baselineWpm,
+  //   accuracy: baselineAccuracy,
+  // }
 }
 
 export function saveEntries(entries: Entry[]) {

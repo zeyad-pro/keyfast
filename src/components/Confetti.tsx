@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useApp } from "../context/AppContext";
+import { Portal } from "./Portal";
 
 type Piece = {
   id: string;
@@ -14,18 +15,16 @@ type Piece = {
   round: boolean;
 };
 
-// restrained palette — no rainbow. Brand blue + warm neutrals + one amber accent
-const COLORS_BY_THEME = {
+const COLORS_BY_THEME: Record<"dark" | "light", string[]> = {
   dark:  ["#6b9bff", "#6ec5bb", "#d8a35a", "#eef2f8", "#1a1f2a"],
   light: ["#3b6dd1", "#4a9d94", "#b8863b", "#14161a", "#efece2"],
 };
 
-// inside the component
-
 export function Confetti({ fireKey }: { fireKey: number }) {
+  const { theme } = useApp();
   const [pieces, setPieces] = useState<Piece[]>([]);
-    const { theme } = useApp();
-    const COLORS = COLORS_BY_THEME[theme];
+  const COLORS = COLORS_BY_THEME[theme];
+
   useEffect(() => {
     if (!fireKey) return;
     const next: Piece[] = Array.from({ length: 70 }, (_, i) => ({
@@ -43,29 +42,31 @@ export function Confetti({ fireKey }: { fireKey: number }) {
     setPieces(next);
     const timer = window.setTimeout(() => setPieces([]), 4000);
     return () => window.clearTimeout(timer);
-  }, [fireKey]);
+  }, [fireKey, COLORS]);
 
   if (!pieces.length) return null;
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[100] overflow-hidden">
-      {pieces.map((p) => (
-        <span
-          key={p.id}
-          className="kf-confetti-piece"
-          style={{
-            left: `${p.left}%`,
-            width: p.width,
-            height: p.height,
-            background: p.color,
-            borderRadius: p.round ? "999px" : "2px",
-            animationDelay: `${p.delay}s`,
-            animationDuration: `${p.duration}s`,
-            ["--drift" as string]: `${p.drift}px`,
-            ["--spin" as string]: `${p.spin}deg`,
-          } as React.CSSProperties}
-        />
-      ))}
-    </div>
+    <Portal>
+      <div className="pointer-events-none fixed inset-0 z-[100] overflow-hidden">
+        {pieces.map((p) => (
+          <span
+            key={p.id}
+            className="kf-confetti-piece"
+            style={{
+              left: `${p.left}%`,
+              width: p.width,
+              height: p.height,
+              background: p.color,
+              borderRadius: p.round ? "999px" : "2px",
+              animationDelay: `${p.delay}s`,
+              animationDuration: `${p.duration}s`,
+              ["--drift" as string]: `${p.drift}px`,
+              ["--spin" as string]: `${p.spin}deg`,
+            } as React.CSSProperties}
+          />
+        ))}
+      </div>
+    </Portal>
   );
 }

@@ -12,6 +12,16 @@ export type Dict = {
   themeLight: string;
   themeDark: string;
 
+  welcomeTitle: string;
+  welcomeBody: string;
+  welcomeAdd: string;
+  welcomeSkip: string;
+  emptyTitle: string;
+  emptyBody: string;
+  dateFormat: string;
+  invalidDateFormat: string;
+  githubSource: string;
+
   streak: string;
   current: string;
   max: string;
@@ -98,6 +108,17 @@ export const translations: Record<"en" | "ar", Dict> = {
     completed: "Days logged",
     unlimited: "unlimited",
     days: "days",
+
+    welcomeTitle: "Welcome to KeyFast",
+    welcomeBody:
+      "Log your first session to start tracking speed and accuracy — or skip and explore first.",
+    welcomeAdd: "Log first day",
+    welcomeSkip: "Skip for now",
+    emptyTitle: "No sessions yet.",
+    emptyBody: "Log your first day to start seeing charts.",
+    dateFormat: "Format: dd/mm/yyyy",
+    invalidDateFormat: "Enter date as dd/mm/yyyy",
+    githubSource: "Source on GitHub",
 
     // charts
     chartSpeed: "Speed over time",
@@ -190,6 +211,17 @@ export const translations: Record<"en" | "ar", Dict> = {
     accuracy: "الدقة",
     baseline: "خط الأساس",
     day: "اليوم",
+
+    welcomeTitle: "أهلًا في KeyFast",
+    welcomeBody:
+      "سجّل أول جلسة عشان تبدأ تتابع سرعتك ودقتك — أو اسكيب واتفرج الأول.",
+    welcomeAdd: "سجّل أول يوم",
+    welcomeSkip: "اسكيب دلوقتي",
+    emptyTitle: "مفيش جلسات لسه.",
+    emptyBody: "سجّل أول يوم عشان الرسوم تبدأ تظهر.",
+    dateFormat: "الصيغة: يوم/شهر/سنة",
+    invalidDateFormat: "اكتب التاريخ بالشكل يوم/شهر/سنة",
+    githubSource: "الكود على GitHub",
 
     newSessionTitle: "سجّل جلسة",
     newSessionSubtitle: "اكتب نتايجك النهاردة أو لأي يوم فاتك.",

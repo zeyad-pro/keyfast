@@ -1,15 +1,22 @@
-import { BookOpen, RotateCcw, Save, Settings as SettingsIcon } from "lucide-react";
+import {
+  BookOpen,
+  RotateCcw,
+  Save,
+  Settings as SettingsIcon,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { useApp } from "../context/AppContext";
 
 export function Help() {
-  const { t, settings, updateSettings, reset } = useApp();
+  const { t, settings, updateSettings, reset, toasts } = useApp();
 
   const [startDate, setStartDate] = useState(settings.startDate);
   const [goalDays, setGoalDays] = useState(String(settings.goalDays));
   const [baselineWpm, setBaselineWpm] = useState(String(settings.baselineWpm));
-  const [baselineAcc, setBaselineAcc] = useState(String(settings.baselineAccuracy));
-  const [notice, setNotice] = useState("");
+  const [baselineAcc, setBaselineAcc] = useState(
+    String(settings.baselineAccuracy),
+  );
+  // const [notice, toast.success] = useState("");
 
   useEffect(() => {
     setStartDate(settings.startDate);
@@ -18,12 +25,12 @@ export function Help() {
     setBaselineAcc(String(settings.baselineAccuracy));
   }, [settings]);
 
-  useEffect(() => {
-    if (!notice) return;
-    const timer = window.setTimeout(() => setNotice(""), 2400);
-    return () => window.clearTimeout(timer);
-  }, [notice]);
-
+  // useEffect(() => {
+  //   if (!notice) return;
+  //   const timer = window.setTimeout(() => toast.success(""), 2400);
+  //   return () => window.clearTimeout(timer);
+  // }, [notice]);
+  const { toast } = useApp();
   const save = () => {
     updateSettings({
       startDate,
@@ -31,13 +38,13 @@ export function Help() {
       baselineWpm: Number(baselineWpm) || 30,
       baselineAccuracy: Number(baselineAcc) || 95,
     });
-    setNotice(t.settingsSaved);
+    toast.success(t.settingsSaved);
   };
 
   const onReset = () => {
     if (window.confirm(t.resetConfirm)) {
       reset();
-      setNotice(t.resetDone);
+      toast.success(t.resetDone);
     }
   };
 
@@ -50,19 +57,25 @@ export function Help() {
         <h1 className="font-display text-4xl leading-[1.1] tracking-tight text-[var(--kf-ink)] sm:text-5xl">
           {t.helpTitle}
         </h1>
-        <p className="mt-4 max-w-lg text-base text-[var(--kf-body)]">{t.helpIntro}</p>
+        <p className="mt-4 max-w-lg text-base text-[var(--kf-body)]">
+          {t.helpIntro}
+        </p>
       </div>
 
       <section className="mb-10 rounded-lg border border-[var(--kf-hairline)] bg-[var(--kf-canvas)]">
         <ul className="divide-y divide-[var(--kf-hairline-soft)]">
-          {[t.helpBullet1, t.helpBullet2, t.helpBullet3, t.helpBullet4].map((line, i) => (
-            <li key={i} className="flex gap-4 p-6">
-              <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[var(--kf-surface-card)] text-xs font-medium text-[var(--kf-ink)]">
-                {i + 1}
-              </span>
-              <p className="text-sm leading-relaxed text-[var(--kf-body)]">{line}</p>
-            </li>
-          ))}
+          {[t.helpBullet1, t.helpBullet2, t.helpBullet3, t.helpBullet4].map(
+            (line, i) => (
+              <li key={i} className="flex gap-4 p-6">
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[var(--kf-surface-card)] text-xs font-medium text-[var(--kf-ink)]">
+                  {i + 1}
+                </span>
+                <p className="text-sm leading-relaxed text-[var(--kf-body)]">
+                  {line}
+                </p>
+              </li>
+            ),
+          )}
         </ul>
       </section>
 
@@ -130,16 +143,22 @@ export function Help() {
         </div>
       </section>
 
-      {notice && (
+      {/* {notice && (
         <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 kf-fade-up rounded-md border border-[var(--kf-hairline)] bg-[var(--kf-canvas)] px-5 py-3 text-sm text-[var(--kf-ink)]">
           {notice}
         </div>
-      )}
+      )} */}
     </div>
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <label className="block">
       <span className="mb-2 block text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--kf-muted)]">
