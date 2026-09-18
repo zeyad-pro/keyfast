@@ -1,18 +1,34 @@
-import { BookOpen, Languages, LayoutDashboard, PlusCircle, Settings } from "lucide-react";
+import {
+  BookOpen,
+  Languages,
+  LayoutDashboard,
+  PlusCircle,
+  Settings,
+} from "lucide-react";
 import { BrandMark } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
 import { useApp } from "../context/AppContext";
 
 export type Page = "dashboard" | "new" | "help" | "settings";
 
-export function Nav({ page, onNavigate }: { page: Page; onNavigate: (p: Page) => void }) {
+export function Nav({
+  page,
+  onNavigate,
+}: {
+  page: Page;
+  onNavigate: (p: Page) => void;
+}) {
   const { t, lang, setLang } = useApp();
 
   const items: Array<{ id: Page; label: string; icon: React.ReactNode }> = [
-    { id: "dashboard", label: t.navDashboard, icon: <LayoutDashboard size={15} /> },
-    { id: "new",       label: t.navNew,       icon: <PlusCircle size={15} /> },
-    { id: "help",      label: t.navHelp,      icon: <BookOpen size={15} /> },
-    { id: "settings",  label: t.settings,     icon: <Settings size={15} /> },
+    {
+      id: "dashboard",
+      label: t.navDashboard,
+      icon: <LayoutDashboard size={15} />,
+    },
+    { id: "new", label: t.navNew, icon: <PlusCircle size={15} /> },
+    { id: "help", label: t.navHelp, icon: <BookOpen size={15} /> },
+    { id: "settings", label: t.settings, icon: <Settings size={15} /> },
   ];
 
   return (

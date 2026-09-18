@@ -59,8 +59,12 @@ export type Dict = {
   duplicate: string;
 
   viewEntries: string;
-viewFull: string;
-futureDate: string;
+  viewFull: string;
+  futureDate: string;
+
+
+  performanceEyebrow: string;
+performanceTitle: string;
 
   history: string;
   recordedDays: string;
@@ -124,9 +128,13 @@ export const translations: Record<"en" | "ar", Dict> = {
     invalidDateFormat: "Enter date as dd/mm/yyyy",
     githubSource: "Source on GitHub",
 
+
+      performanceEyebrow: "Performance",
+performanceTitle: "Three views of your progress",
+
     viewEntries: "Completed only",
-viewFull: "Full timeline",
-futureDate: "You can't log a future date.",
+    viewFull: "Full timeline",
+    futureDate: "You can't log a future date.",
 
     // charts
     chartSpeed: "Speed over time",
@@ -203,6 +211,9 @@ futureDate: "You can't log a future date.",
     themeLight: "الوضع الفاتح",
     themeDark: "الوضع الداكن",
 
+    performanceEyebrow: "الأداء",
+performanceTitle: "ثلاث زوايا لتقدمك",
+
     streak: "سلسلة الأيام",
     current: "السرعة الحالية",
     max: "أعلى سرعة",
@@ -251,8 +262,8 @@ futureDate: "You can't log a future date.",
     duplicate: "في نتيجة مسجلة بالفعل في التاريخ ده.",
 
     viewEntries: "المسجّل بس",
-viewFull: "الجدول كامل",
-futureDate: "مش مسموح تسجّل تاريخ في المستقبل.",
+    viewFull: "الجدول كامل",
+    futureDate: "مش مسموح تسجّل تاريخ في المستقبل.",
 
     history: "السجل",
     recordedDays: "الأيام المسجلة",

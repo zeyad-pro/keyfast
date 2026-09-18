@@ -52,8 +52,8 @@ export function NewDay({ onNavigate }: { onNavigate: (p: Page) => void }) {
       toast.error(t.invalidDateFormat);
       return;
     }
-if (!date) return toast.error(t.invalidDateFormat);
-  if (date > today) return toast.error(t.futureDate); 
+    if (!date) return toast.error(t.invalidDateFormat);
+    if (date > today) return toast.error(t.futureDate);
     const w = Number(wpm);
     const a = Number(accuracy);
 

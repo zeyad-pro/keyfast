@@ -28,7 +28,9 @@ function Shell() {
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
-  useEffect(() => { setFlashKey((k) => k + 1); }, [theme]);
+  useEffect(() => {
+    setFlashKey((k) => k + 1);
+  }, [theme]);
 
   const navigate = (p: Page) => {
     if (window.location.hash !== `#/${p}`) window.location.hash = `/${p}`;
@@ -42,9 +44,9 @@ function Shell() {
 
       <main key={flashKey} className="flex-1 kf-theme-fade">
         {page === "dashboard" && <Dashboard onNavigate={navigate} />}
-        {page === "new"       && <NewDay onNavigate={navigate} />}
-        {page === "help"      && <Help onNavigate={navigate} />}
-        {page === "settings"  && <Settings />}
+        {page === "new" && <NewDay onNavigate={navigate} />}
+        {page === "help" && <Help onNavigate={navigate} />}
+        {page === "settings" && <Settings />}
       </main>
 
       <footer className="border-t border-[var(--kf-hairline)] bg-[var(--kf-canvas)]">
@@ -75,7 +77,9 @@ function Shell() {
               <span className="font-display text-sm tracking-tight text-[var(--kf-primary)]">
                 PREX
               </span>
-              <span className="text-[var(--kf-muted)] transition-colors duration-150 group-hover:text-[var(--kf-ink)]">↗</span>
+              <span className="text-[var(--kf-muted)] transition-colors duration-150 group-hover:text-[var(--kf-ink)]">
+                ↗
+              </span>
             </a>
           </div>
         </div>

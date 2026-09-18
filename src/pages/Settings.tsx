@@ -22,19 +22,19 @@ export function Settings() {
   }, [settings]);
   const today = toLocalDateString();
 
-const save = () => {
-  if (startDate > today) {
-    toast.error(t.futureDate);
-    return;
-  }
-  updateSettings({
-    startDate,
-    goalDays: Math.max(0, Number(goalDays) || 0),
-    baselineWpm: Number(baselineWpm) || 30,
-    baselineAccuracy: Number(baselineAcc) || 95,
-  });
-  toast.success(t.settingsSaved);
-};
+  const save = () => {
+    if (startDate > today) {
+      toast.error(t.futureDate);
+      return;
+    }
+    updateSettings({
+      startDate,
+      goalDays: Math.max(0, Number(goalDays) || 0),
+      baselineWpm: Number(baselineWpm) || 30,
+      baselineAccuracy: Number(baselineAcc) || 95,
+    });
+    toast.success(t.settingsSaved);
+  };
   const onReset = () => {
     if (window.confirm(t.resetConfirm)) {
       reset();

@@ -94,8 +94,8 @@ export function DateInput({
     err === "range"
       ? (maxMessage ?? invalidMessage)
       : err === "format"
-      ? invalidMessage
-      : "";
+        ? invalidMessage
+        : "";
 
   return (
     <div className="relative">

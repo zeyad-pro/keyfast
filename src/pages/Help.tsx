@@ -15,20 +15,26 @@ export function Help({ onNavigate }: { onNavigate: (p: Page) => void }) {
         <h1 className="font-display text-4xl leading-[1.1] tracking-tight text-[var(--kf-ink)] sm:text-5xl">
           {t.helpTitle}
         </h1>
-        <p className="mt-4 max-w-lg text-base text-[var(--kf-body)]">{t.helpIntro}</p>
+        <p className="mt-4 max-w-lg text-base text-[var(--kf-body)]">
+          {t.helpIntro}
+        </p>
       </div>
 
       {/* Bullets */}
       <section className="rounded-lg border border-[var(--kf-hairline)] bg-[var(--kf-canvas)]">
         <ul className="divide-y divide-[var(--kf-hairline-soft)]">
-          {[t.helpBullet1, t.helpBullet2, t.helpBullet3, t.helpBullet4].map((line, i) => (
-            <li key={i} className="flex gap-4 p-6">
-              <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[var(--kf-surface-card)] text-xs font-medium text-[var(--kf-ink)]">
-                {i + 1}
-              </span>
-              <p className="text-sm leading-relaxed text-[var(--kf-body)]">{line}</p>
-            </li>
-          ))}
+          {[t.helpBullet1, t.helpBullet2, t.helpBullet3, t.helpBullet4].map(
+            (line, i) => (
+              <li key={i} className="flex gap-4 p-6">
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[var(--kf-surface-card)] text-xs font-medium text-[var(--kf-ink)]">
+                  {i + 1}
+                </span>
+                <p className="text-sm leading-relaxed text-[var(--kf-body)]">
+                  {line}
+                </p>
+              </li>
+            ),
+          )}
         </ul>
       </section>
 
